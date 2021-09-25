@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Ameal from '../Ameal/Ameal';
+import Cart from '../Cart/Cart';
 
 const Meals = () => {
     const [meals_A, setMeals_A] = useState([])
-    console.log(meals_A)
+    const [cart, setCart] = useState([])
+    // console.log(cart)
 
 
     useEffect(() => {
@@ -11,6 +13,12 @@ const Meals = () => {
             .then(res => res.json())
             .then(data => setMeals_A(data.meals))
     }, [])
+
+    const handleAddCart = product => {
+        const newCart = [...cart, product]
+        setCart(newCart)
+        // console.log(cart)
+    }
 
     return (
         <div className="overflow-hidden container">
@@ -20,6 +28,7 @@ const Meals = () => {
                         {
                             meals_A.map(meal_A => <Ameal
                                 mealA={meal_A}
+                                handleAddCart={handleAddCart}
                                 key={meal_A.idMeal}
                             >
                             </Ameal>)
@@ -28,7 +37,10 @@ const Meals = () => {
                 </div>
 
                 <div className="col-md-3">
-                    <h2>cart add korbo</h2>
+                    <Cart
+                        cart={cart}
+                    >
+                    </Cart>
                 </div>
             </div>
         </div>

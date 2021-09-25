@@ -5,7 +5,8 @@ import './Ameal.css'
 
 const Ameal = (props) => {
     // console.log(props.mealA)
-    const { strMealThumb, strMeal, strInstructions, strYoutube } = props.mealA
+    // console.log(props.cart)
+    const { strMealThumb, strMeal, strInstructions, strYoutube } = props.mealA || {}
     const cartAdd = <FontAwesomeIcon icon={faShoppingCart} />
     const videoAdd = <FontAwesomeIcon icon={faVideo} />
     return (
@@ -15,7 +16,7 @@ const Ameal = (props) => {
                 <div class="card-body">
                     <h5 class="card-title">{strMeal}</h5>
                     <p class="card-text">{strInstructions.slice(0, 150)}</p>
-                    <button className="btn btn-warning me-3">{cartAdd} Add to cart</button>
+                    <button onClick={() => props.handleAddCart(props.mealA)} className="btn btn-warning me-3">{cartAdd} Add to cart</button>
                     <a href={strYoutube}><button className="btn btn-primary">{videoAdd} Watch Video</button></a>
                 </div>
             </div>
